@@ -1,8 +1,9 @@
 var logger = require("./logger.js");
 var mongoose = require('mongoose');
 var mongooseHelper = require('./mongoose-helper.js');
+var DB_NAME = "malapraxis_investigacion_2"
 
-mongoose.connect('mongodb://localhost/malapraxis_investigacion');
+mongoose.connect('mongodb://localhost/' + DB_NAME);
 
 var Camino;
 var Persona;
@@ -17,10 +18,18 @@ db.once('open', function (callback) {
       comienzo : String,
       puente : [String],
       final : String,
-      persona : { type: mongoose.Schema.Types.ObjectId, ref: "Persona" }
+      grupo : String,
+    //   persona : { type: mongoose.Schema.Types.ObjectId, ref: "Persona" }
+      grupo : { type: mongoose.Schema.Types.ObjectId, ref: "Grupo" }
   });
 
-  var personasSchema = mongoose.Schema({
+  // var personasSchema = mongoose.Schema({
+  //   nombre : String,
+  // 	observaciones : String,
+  //   caminos : [{ type: mongoose.Schema.Types.ObjectId, ref: "Camino" } ]
+  // });
+
+  var gruposSchema = mongoose.Schema({
     nombre : String,
   	observaciones : String,
     caminos : [{ type: mongoose.Schema.Types.ObjectId, ref: "Camino" } ]
@@ -32,7 +41,8 @@ db.once('open', function (callback) {
   });
 
   module.exports.Camino = mongoose.model('Camino', caminosSchema);
-  module.exports.Persona = mongoose.model('Persona', personasSchema);
+  // module.exports.Persona = mongoose.model('Persona', personasSchema);
+  module.exports.Grupo = mongoose.model('Grupo', gruposSchema);
   module.exports.Sinonimo = mongoose.model('Sinonimo', sinonimosSchema);
 
   module.exports.onOpened();
@@ -47,7 +57,7 @@ module.exports = {
     onOpened : function() {},
 
     savePersonasYCaminos : function(jsonData, finishCallback) {
-        mongooseHelper.saveParentAndChildren(module.exports.Persona, module.exports.Camino, jsonData, finishCallback);
+        mongooseHelper.saveParentAndChildren(module.exports.Grupo, module.exports.Camino, jsonData, finishCallback);
     },
     close : mongooseHelper.close
 }
