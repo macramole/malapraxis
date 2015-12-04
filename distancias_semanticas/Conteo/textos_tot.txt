@@ -1,0 +1,2 @@
+/mnt/stuff/Code/nodejs/malapraxis_investigacion/distancias_semanticas/Conteo/Textos/Prueba
+/mnt/stuff/Code/nodejs/malapraxis_investigacion/distancias_semanticas/Conteo/Textos/Prueba2

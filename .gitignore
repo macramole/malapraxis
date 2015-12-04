@@ -1,0 +1,10 @@
+node_modules/
+relacionesCaminos.json
+visualizacion/d3network.json
+visualizacion/network/d3network.js
+#visualizacion/network/d3network.json
+data/*
+distancias_semanticas/word2vec/*.bin
+distancias_semanticas/Conteo/Textos/*
+distancias_semanticas/Conteo/distancia/node_modules/
+logger.log

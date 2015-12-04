@@ -1,0 +1,4 @@
+1	casa
+2	mancha
+3	arbol
+4	piso

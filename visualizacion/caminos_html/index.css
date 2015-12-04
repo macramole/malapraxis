@@ -1,0 +1,58 @@
+body {
+  font-family: Monospace;
+}
+ul {
+  list-style: none;
+  /*margin: 0;*/
+  padding: 0;
+}
+ul li {
+  display: inline-block;
+  text-transform: uppercase;
+}
+ul li::before {
+  content: "- ";
+  color: black;
+  font-weight: normal;
+}
+ul.caminoPrincipal li:first-child,
+ul.caminoPrincipal li:last-child {
+  color: #0000ff;
+  font-weight: bold;
+}
+ul.caminosRelacionados {
+  margin-left: 2em;
+  /*overflow: hidden;
+		height: 0px;*/
+}
+ul.caminosRelacionados > li {
+  margin-bottom: 1em;
+  display: block;
+}
+ul.caminosRelacionados > li::before {
+  content: "";
+}
+ul.caminosRelacionados ul li:first-child::before {
+  content: "-- ";
+  color: black;
+  font-weight: normal;
+}
+ul.caminosRelacionados ul li.nivelRelacion1 {
+  color: #1ba41b;
+  font-weight: bold;
+}
+ul.caminosRelacionados ul li.nivelRelacion2 {
+  color: #ff0000;
+  font-weight: bold;
+}
+ul.caminosRelacionados ul li.nivelRelacion2 span {
+  color: #adadad;
+  font-weight: normal;
+  margin-left: -0.5em;
+}
+ul.caminosRelacionados ul li.nivelRelacion2 span::before {
+  content: "(";
+}
+ul.caminosRelacionados ul li.nivelRelacion2 span::after {
+  content: ")";
+}

@@ -1,0 +1,2 @@
+Poner cuerpos de palabras en el directorio Textos. Puede haber muchos archivos distintos. El programa agarrará todos. Cualquier .txt.
+Fijarse que cuando limpie lo haga bien porque estaba generando algunas cosas raras con los acentos, quizás tenga que ver con el encoding.

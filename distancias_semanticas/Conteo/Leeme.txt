@@ -1,0 +1,73 @@
+#################################################################################
+#  ALGORITMOS DE CONTEO DE TEXTOS Y MATRIZ DE CO-OCURRENCIA DE PALABRAS		#
+#										#
+#	CREADO POR EL LABORATORIO DE NEUROCIENCIA INTEGRATIVA			#
+#			Contacto: meliascosta@gmail.com				#
+#										#
+#################################################################################
+
+
+
+
+¿Qué es?
+========
+
+
+Es un paquete con algoritmos para contar co-ocurrencias de palabras a partir de archivos de texto. Esencialmente permite contar la cantidad de veces que dos palabras aparecen a una dada distancia W (que puede ser variable). Por ejemplo si todos los textos fueran solamente la frase:
+
+			"Síganme, no los voy a defraudar"
+
+Y pedimos la frecuencia de co-ocurrencia entre "siganme" y "defraudar" a distancia W = 8, el reslutado sería 1 porque ambas palabras aparecen una unica vez a distancia (en cantidad de palabras) menor o igual a 8. Si ahora hacemos lo mismo para distancia W = 3, daría cero porque nunca en aparecen a distancia menor o igual a 3. Para una descripcion mas completa con aplicacion de los algoritmos ver: http://neurociencia.df.uba.ar/papers/eliascosta2008jnd.pdf
+
+
+¿Que necesito?
+============== 
+
+El paquete esta integramente programado en Perl por lo cual hace falta un interprete de Perl y las librerias de Gtk si se quiere usar el GUI (Graphical user interface). En linux ambas librerias son estandar y por lo tanto ya vienen pre-instaladas. Para usar en windows se puede usar el interprete Active-Perl que se baja gratis de internet. Si se quiere usar en Windows hay que tener en cuenta que pueden surgir algunas incompatibilidades por la forma de escribir directorios (se usa la barra \ en lugar de /). No es muy dificil modificar el codigo en caso de que esto ocurra. 
+
+
+¿Como se usa?
+=============
+
+Los diferentes archivos realizan la siguiente secuencia de tareas:
+
+			
+		1) Limpieza: se toma un archivo de texto y se les quitan acentos, puntuacion, etc. el resultado se
+		guarda en un *.lim
+		(archivo: limpiar.pl)
+
+		2) Conteo: Toma los textos y genera a partir de ellos archivos .mI donde I = 1,2,3,4,... que cuentan
+		cuantas veces aparece cada par de palabras separado a distancia EXACTAMENTE I.
+		(archivo: Contar.pl)
+
+		3) Crear la Matriz: a partir de una lista de palabras (el archivo indices.txt) se crea la matriz de 
+		co-ocurrencias a distancia menor o igual que W (por default W=9, esta marcado donde cambiarlo en el 
+		codigo). Los textos que se recorren para generar la matriz los toma del archivo: textos_tot.txt
+		(archivo: CrMatriz.pl)
+
+NOTAS: 
+	- La limpieza y el conteo se efectuan una unica vez mientras que CrMatriz se corre cada vez que se quiere una nueva matriz de co-ocurrencias. 
+	- LA DIAGONAL DE LA MATRIZ CONTIENE LA FRECUENCIA TOTAL DE APARICION DE CADA PALABRA.
+
+El GUI
+======
+
+	Es, esencialmente, una botonera para ejecutar cada uno de los 3 pasos descriptos mas arriba. Se incluyen, tambien algunas funciones auxiliares. 
+
+	Descripcion de los botones:
+
+		LIMPIAR: limpia todos los textos
+		CONTAR NUEVOS: Cuenta todos los textos que no han sido contados hasta ahora.
+		RECONTAR TODOS: Fuerza el reconteo de todos los textos
+		INDEXAR: toma una lista de palabras sin numerar (indices_sin.txt) y devuelve otra (indices.txt) numerada
+		GENERAR DIRECTORIOS: crea el archivo textos_tot.txt con todos los textos del corpus (necesario antes de 		crear la matriz).
+		CREAR MATRIZ: Toma indices.txt y devuelve la matriz de co-ocurrencias sobre los textos en textos_tot.txt
+
+Estan puestos en el orden en que deben, en principio, ser ejecutados.
+
+
+Disclaimer
+==========
+
+	Este paquete no se ofrece como un producto terminado. Adaptarlo para un proyecto en particular puede requerir trabajo y escribir nuevo codigo. Todo comentario, duda, pregunta, etc. es bienvenido.
+
