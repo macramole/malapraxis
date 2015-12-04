@@ -1,4 +1,4 @@
-cstToDB.js
+csvToDB.js
 ==========
 
 Se le pasa el path a un archivo csv y el nombre del grupo y lo guarda en la base
