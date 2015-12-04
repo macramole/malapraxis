@@ -1,7 +1,12 @@
-csvToDB.js
+cstToDB.js
 ==========
 
-Se fija en el directorio data los csv y los guarda en la base de datos Mongo
+Se le pasa el path a un archivo csv y el nombre del grupo y lo guarda en la base
+
+allCSVToDB.js
+==========
+
+[DEPRECATED] Se fija en el directorio data los csv y los guarda en la base de datos Mongo
 
 analizarPorPalabra.js
 =====================
