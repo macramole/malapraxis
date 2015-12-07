@@ -18,7 +18,7 @@ db.once('open', function (callback) {
       comienzo : String,
       puente : [String],
       final : String,
-      grupo : String,
+    //   grupo : String,
     //   persona : { type: mongoose.Schema.Types.ObjectId, ref: "Persona" }
       grupo : { type: mongoose.Schema.Types.ObjectId, ref: "Grupo" }
   });

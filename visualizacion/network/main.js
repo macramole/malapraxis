@@ -1,6 +1,7 @@
 var encabezados = ["plata","barrio","ropa","domingo","sarmiento","esquema","mapa","facebook","profesor","martillo","cocina","rezo"];
 var duplas = ["plata - compañero","barrio - bandera","ropa - abuelo/a","domingo - vereda","sarmiento - pelos","esquema - zapatilla","mapa - ecuación","facebook - pizarrón","profesor - pizza","martillo - genes","cocina - diploma","rezo - celular"];
 var grupos = [];
+var ordenGrupos = [1, 2, 0, 3]; //indices
 
 var width = window.screen.availWidth * 0.98;
 var height = window.screen.availHeight * 0.89;
@@ -273,7 +274,7 @@ function init(categoria, gruposSeleccionados) {
 
         force[index].on("tick", tick(index));
 
-        $(".cantidad").eq(index).text("(" + force[index].nodes().length + ")");
+        $("li[data-index=" + index + "] > .cantidad").text("(" + force[index].nodes().length + ")");
     });
 }
 
@@ -340,15 +341,17 @@ function initUI() {
         grupos.push(grupo);
     }
 
-    grupos.forEach( function( grupo, index ) {
-        var $li = $("<li></li>").css("background-color", coloresGrupos(index));
+    // grupos.forEach( function( grupo, index ) {
+    ordenGrupos.forEach( function(index, ordenIndex) {
+        var grupo = grupos[index];
+        var $li = $("<li></li>").css("background-color", coloresGrupos(index)).attr("data-index", index);
         var $input = $("<input type='checkbox' />")
         var $span = $("<span></span>").text(grupo);
         var $div = $("<div class='cantidad'></div>");
 
-        // if ( index <= 1 ) {
+        if ( ordenIndex <= 1 ) {
             $input.attr("checked", true);
-        // }
+        }
 
         $li.append($input).append($span).append($div);
         $("#grupos").append($li);

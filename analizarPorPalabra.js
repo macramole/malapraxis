@@ -21,7 +21,6 @@ var currentGrupoIndex = 0;
 
 var analizar = function (grupo, callback) {
 	// console.log(grupo.id);
-	// setTimeout(function(){logger.info("puto")}, 500);
 	db.Camino.find({ grupo : grupo.id }).populate("grupo", "nombre").exec( function(err, caminos) {
 		// console.log("b");
 		Sync( function() {
