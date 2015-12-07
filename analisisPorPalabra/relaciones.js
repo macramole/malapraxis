@@ -1,7 +1,7 @@
 var logger = require("../logger.js");
 var modulosDeRelacion = ["plurales", "sinonimos"];
 //var modulosDeRelacion = ["plurales"];
-var relaciones = [];
+var relaciones = {};
 var currentCamino = null;
 
 module.exports = {
@@ -43,7 +43,8 @@ module.exports = {
 			id : camino.id,
 			comienzo : camino.comienzo,
 			puente : camino.puente,
-			final : camino.final
+			final : camino.final,
+			grupo : camino.grupo.nombre
 		};
 
 		currentCamino = {
@@ -51,7 +52,8 @@ module.exports = {
 			caminosRelacionados : []
 		};
 
-		relaciones.push(currentCamino);
+		relaciones[camino.grupo.nombre] = relaciones[camino.grupo.nombre] ? relaciones[camino.grupo.nombre] : [];
+		relaciones[camino.grupo.nombre].push(currentCamino);
 	},
 
 	addCaminoRelacionado : function(camino, palabrasRelevantes) {

@@ -71,5 +71,10 @@ module.exports = {
     },
     info : function(msg) {
         log( HEADER_INFO, msg);
+    },
+    // log and exit
+    x : function(msg) {
+        log( HEADER_INFO, msg );
+        process.exit(1);
     }
 }

@@ -11,6 +11,10 @@ var CANT_CAMINOS_POR_PERSONA = 12;
 
 var csvFile = process.argv[2];
 var grupo = process.argv[3];
+// var csvFile = "data/Datos\ __\ Caminos\ de\ palabras\ -\ 5to\ 2da\ FINAL.csv";
+// var grupo = "asd";
+
+
 
 if ( !csvFile || !grupo ) {
     logger.error("usage: csvToDB <csvFile> <nombre_grupo>");
@@ -57,15 +61,15 @@ fs.readFileSync( file )
             } else {
                 var arrPalabras = [];
                 arrLine.forEach( function(palabra, index) {
-                    if ( palabra ) {
-                        arrPalabras.push(palabra);
+                    if ( palabra.trim() ) {
+                        arrPalabras.push(palabra.trim());
                     }
                 });
 
                 var comienzo = arrPalabras[0];
                 var final = arrPalabras.pop();
 
-                arrPalabras.splice(0, 1);
+                arrPalabras.splice(0, 1); // le saco la primera
 
                 var camino = {
                     "comienzo" : comienzo,
@@ -84,6 +88,7 @@ fs.readFileSync( file )
     } );
 
 db.onOpened = function() {
+    // console.log(jsonData);
     // logger.info(jsonData);
     db.savePersonasYCaminos(jsonData, function(err) {
         if ( err ) {
