@@ -115,12 +115,13 @@ function highlightRelations(nodeData) {
     });
 
     link.forEach(function(unLink, linkIndex) {
-        unLink.transition().style("stroke-width", function( oLinkData ) {
-            if ( oLinkData.source.id == nodeData.id || oLinkData.target.id == nodeData.id ) {
-                return Math.pow(oLinkData.strength,2.5);
-            }
-            return 1;
-        })
+        unLink.transition()
+        // .style("stroke-width", function( oLinkData ) {
+        //     if ( oLinkData.source.id == nodeData.id || oLinkData.target.id == nodeData.id ) {
+        //         return Math.pow(oLinkData.strength,2.5);
+        //     }
+        //     return 1;
+        // })
         .style("opacity", function( oLinkData ) {
             if ( oLinkData.source.id == nodeData.id || oLinkData.target.id == nodeData.id ) {
                 return 1;
@@ -138,7 +139,8 @@ function highlightRelations(nodeData) {
 function unhighlightAll() {
     $("#info").removeClass("active");
     link.forEach(function(unLink){
-        unLink.transition().style("stroke-width", 1).style("opacity", 1);
+        // unLink.transition().style("stroke-width", 1).style("opacity", 1);
+        unLink.transition().style("opacity", 1);
     });
     node.forEach(function(unNode) {
         unNode.transition().style("opacity", 1);
@@ -213,6 +215,12 @@ function init(categoria, gruposSeleccionados) {
             // .attr("x2", function(d) { return d.target.x; })
             // .attr("y2", function(d) { return d.target.y; })
             .attr("class", "link i" + index)
+            .style("stroke-width", function( oLinkData ) {
+                // if ( oLinkData.source.id == nodeData.id || oLinkData.target.id == nodeData.id ) {
+                    return Math.pow(oLinkData.strength,2.5);
+                // }
+                // return 1;
+            })
             .attr("stroke-linecap", "round");
 
         link[index].grupo = grupoSeleccionado;
