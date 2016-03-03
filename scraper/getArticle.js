@@ -1,62 +1,57 @@
-var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var Entities = require('html-entities').AllHtmlEntities;
+var fs = require('fs');
 var striptags = require('striptags');
-var links = require('./links.json');
-var entities = new Entities();
-var PROTOURL = 'http://www.clarin.com';
-var URL = PROTOURL + links[0].artLinks[0].href;
+var days = require('./links.json');
+var PROTO_URL = 'http://www.clarin.com';
+var TEST = "/entremujeres/familias_ensambladas_0_1334272266.html";
+var rootDir = 'data/';
+//console.log(año + mes + dia);
+//iterando sobre elementos
 
+var getArticle = function(filename) {
+    return function(err, res, body) {
+        //console.log(body);
+        var text = " ";
+        try {
+            var $ = cheerio.load(body);
+            var nota = $('.nota')['0'].children;
+            nota.filter(function(elem) {
+                return elem.type === 'tag';
+            }).map(function(elem) {
+                elem.children.filter(function(subElem) {
+                    return subElem.data !== undefined;
+                }).map(function(subElem) {
+                    //console.log(subElem.data);
+                    text += subElem.data;
+                });
+            });
+            console.log("saving: " + filename);
+            fs.writeFileSync(filename, text);
+        } catch (e) {
+            //console.log(elem);
+            console.log("OOPS: " + e);
+        }
+    };
 
-//helper for creating methods and bind them to dataTypes
-Function.prototype.method = function(name, func) { //defino un método methodo
-  if (!this.prototype[name]) {
-    this.prototype[name] = func; //digo la funcion que le paso ahora puede ser accedida de todas las funciones
-  }
-  return this;
 };
-String.method('insert', function(idx, rem, str) {
-  return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
-});
-String.method('trim', function() {
-  return this.replace(/^\s+|\s+$/g, '');
-});
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------//
-
-var newLiner = function(s, idx) {
-  if (idx >= s.length) { //si se terminó el string
-    fs.writeFileSync('art.txt', s);
-    return;
-  } else {
-    //si no hay un espacio, movete un cachito
-    if (s[idx] !== ' ') {
-      newLiner(s, idx + 1);
-    } else { //si no hay correla devuelta con la insersión en el index actual
-      newLiner(s.insert(idx, 0, '\n'), idx + 100); //GUARDA, antes hacías idx * 2  ENTONCES haces exponential SHIT
+days.map(function(day) {
+    //setting file and dir names
+    var año = day.fecha.split('-')[2] + '/';
+    var mes = day.fecha.split('-')[1] + '/';
+    var dia = day.fecha.split('-')[0] + '/';
+    if (!fs.existsSync(rootDir + año)) {
+        fs.mkdirSync(rootDir + año);
     }
-  }
+    if (!fs.existsSync(rootDir + año + mes)) {
+        fs.mkdirSync(rootDir + año + mes);
+    }
+    if (!fs.existsSync(rootDir + año + mes + dia)) {
+        fs.mkdirSync(rootDir + año + mes + dia);
+    }
+    day.links.map(function(link) {
+        request(PROTO_URL + link.href, getArticle(rootDir + año + mes + dia + striptags(link.title) + '.txt'));
+    });
+});
 
-};
-
-//links[0].artLinks[0]
-var parser = function($) {
-  d = $('.nota').html();
-  //formattedArticle = entities.decode(striptags(newLiner(d,100),''));
-  //formattedArticle = ;
-  newLiner(d, 100);
-  //esta cabeceada la hago porque por alguna razón la función newLiner siempre me devuelve undefined
-  var article = fs.readFileSync('art.txt').toString();
-  fs.writeFileSync('art.txt', entities.decode(striptags(article), '').trim());
-
-};
-//callback
-var gotResponse = function(err, data, body) {
-  var $ = cheerio.load(body);
-  parser($);
-};
-
-//DO
-request(URL, gotResponse);
+//request(PROTO_URL + TEST,getArticle());

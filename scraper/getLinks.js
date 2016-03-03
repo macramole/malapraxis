@@ -53,7 +53,6 @@ var getLinks = function() {
             console.log(err);
         } else {
             var $ = cheerio.load(body);
-
             var day = {
                 fecha: date.d.toString() + '-' + date.m.toString() + '-' + date.y.toString(),
                 links: []
@@ -77,13 +76,11 @@ var getLinks = function() {
                 console.log(date);
                 omitted = true;
             }
-
             if (!omitted) {
                 //ad day links to master array
                 safetySave++;
                 newsLinks.push(day);
                 console.log(day);
-
             }
             //save every once in a while
             if (safetySave == 10) {
@@ -91,10 +88,7 @@ var getLinks = function() {
                 fs.writeFileSync("links.json", JSON.stringify(newsLinks, null, ' '));
                 safetySave = 0;
             }
-
-
             if (getDate() !== UNTIL) {
-
                 //prepare for new day request
                 checkIfNewMonth();
                 checkIfNewYear();
@@ -107,12 +101,8 @@ var getLinks = function() {
                 fs.writeFileSync("links.json", JSON.stringify(newsLinks, null, ' '));
                 console.log("FINISHED");
             }
-
         }
-
-
     };
-
 };
 
 request(ROOT_URL + getDate(), getLinks());
