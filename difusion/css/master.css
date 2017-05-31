@@ -83,8 +83,35 @@ header nav ul li a:hover {
 }
 #imgs .wrapper img {
   width: 10%;
-  display: block;
 /* line-height: 7em; */
-  float: left;
+}
+#imgs .wrapper img.grande {
+  width: 40%;
+}
+#integrant {
+  background-color: #8a8947;
+  color: #fff;
+  text-align: center;
+}
+#integrant .wrapper {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+#integrant .wrapper strong {
+  display: block;
+  margin-bottom: 0.7em;
+  font-size: 1.2em;
+}
+#integrant .wrapper ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#integrant .wrapper ul li {
+  margin-bottom: 2em;
+}
+#integrant .wrapper ul li ul li {
+  margin-bottom: 0.3em;
 }
 /*# sourceMappingURL=master.css.map */
