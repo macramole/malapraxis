@@ -1,0 +1,90 @@
+body {
+  font-family: "Droid Serif", serif;
+}
+p {
+  line-height: 1.5em;
+}
+header {
+  color: #fff;
+  position: fixed;
+/* background-color: #128584; */
+  width: 95%;
+  padding: 1em 0 0.5em;
+  z-index: 100;
+  box-sizing: border-box;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 1px solid #fff;
+}
+header #logo {
+  float: left;
+}
+header nav {
+  float: right;
+}
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+header nav ul li {
+  float: left;
+  margin-left: 2.5em;
+  line-height: 1.8em;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+.section {
+  background-image: url("../images/bg3.png");
+}
+#hola {
+  text-align: center;
+  background-color: #487ea5;
+}
+#hola iframe {
+  width: 63%;
+}
+#hola #logoUntref {
+  text-align: left;
+/* padding-left: 1em; */
+  position: absolute;
+  bottom: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#info {
+  background-color: #48a58b;
+  color: #fff;
+}
+#info .wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+#info .wrapper > div {
+  text-align: center;
+  width: 30%;
+}
+#imgs {
+  background-color: #a56c48;
+}
+#imgs .fp-tableCell {
+  vertical-align: top;
+}
+#imgs .wrapper .sizer {
+  width: 10%;
+  height: 100px;
+}
+#imgs .wrapper img {
+  width: 10%;
+  display: block;
+/* line-height: 7em; */
+  float: left;
+}
+/*# sourceMappingURL=master.css.map */

@@ -1,0 +1,126 @@
+// out: ./master.css, sourcemap: true, compress: false
+
+body {
+    font-family: "Droid Serif", serif;
+}
+
+p {
+    line-height: 1.5em;
+}
+
+header {
+	color: #fff;
+	position: fixed;
+	/* background-color: #128584; */
+	width: 95%;
+	padding: 1em 0 0.5em;
+	z-index: 100;
+	box-sizing: border-box;
+	left: 50%;
+	transform: translateX(-50%);
+	border-bottom: 1px solid white;
+
+    #logo {
+        float: left;
+    }
+
+    nav {
+        float: right;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                float: left;
+                margin-left: 2.5em;
+                line-height: 1.8em;
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.section {
+    background-image: url("../images/bg3.png");
+}
+
+#hola {
+    text-align: center;
+    background-color: #487ea5;
+
+
+    iframe {
+        width: 63%;
+    }
+
+    #logoUntref {
+    	text-align: left;
+    	/* padding-left: 1em; */
+    	position: absolute;
+    	bottom: 1em;
+    	left: 50%;
+    	transform: translateX(-50%);
+    }
+}
+
+#info {
+    background-color: #48a58b;
+    // background-image: url("../images/bg1.png");
+    color: white;
+
+    .wrapper {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        > div {
+            text-align: center;
+            width: 30%;
+
+            h2 {
+            }
+        }
+    }
+}
+
+#imgs {
+    background-color: #a56c48;
+
+
+
+    .fp-tableCell {
+        vertical-align: top;
+    }
+
+    .wrapper {
+        .sizer {
+            width: 10%;
+            height: 100px;
+        }
+
+        img {
+        	width: 10%;
+            // height: 100px;
+            display: block;
+        	/* line-height: 7em; */
+        	// display: block  ;
+        	float: left;
+
+            &.grande {
+                // width: 30%;
+                // height: 20%;
+            }
+        }
+    }
+}
