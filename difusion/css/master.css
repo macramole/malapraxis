@@ -58,6 +58,7 @@ header nav ul li a:hover {
   transform: translateX(-50%);
 }
 #info {
+  padding: 2.5em 0;
   background-color: #48a58b;
   color: #fff;
 }
@@ -95,8 +96,7 @@ header nav ul li a:hover {
 }
 #integrant .wrapper {
   width: 80%;
-  margin: 0 auto;
-  font-size: 1.2em;
+  margin: 6em auto;
 }
 #integrant .wrapper strong {
   display: block;
