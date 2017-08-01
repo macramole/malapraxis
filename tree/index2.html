@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <title>Mala Praxis | Red</title>
+  <meta charset="UTF-8">
+  <script>var palette = ["#a6cee3","#f2fc6c","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928"];</script>
+
+  <script type="text/javascript" src="js/vis.min.js"></script>
+  <script type="text/javascript" src="dataMP.js"></script>
+  <link href="css/vis.min.css" rel="stylesheet" type="text/css" />
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+
+  <style type="text/css">
+    #mynetwork {
+      width: 1100px;
+      height: 800px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    var nodes = [ {
+        id : "Mala Praxis",
+        label : "Mala Praxis",
+        shape : "circle",
+        value: 4,
+        mass: 5,
+        color : palette[2]
+        // icon: {
+        //   face: 'FontAwesome',
+        //   code: '\uf085',
+        //   color: "#000000",
+        //   size: 100
+        // }
+    } ];
+    var edges = [];
+
+    function fixData(parent, children, depth, color) {
+
+        for ( child of children ) {
+            if ( depth >= 3 ) {
+                child.value = 1;
+            }
+
+            nodes.push( {
+                id : child.id,
+                label : child.id,
+                // group : "Algo",
+                shape : child.shape ? child.shape : "dot",
+                value : child.value ? child.value : 2,
+                mass : Math.pow(1.2, 3 - depth),
+                color : child.color ? palette[child.color] : palette[color],
+            } );
+
+            edges.push( {
+                from : parent,
+                to : child.id
+            } );
+
+            if ( child.children ) {
+                fixData( child.id, child.children, depth + 1,  child.color ? child.color : color);
+            }
+        }
+    }
+    fixData("Mala Praxis", dataMP.children, 0, 0);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+        nodes : {
+            scaling : {
+                min : 10,
+                label : {
+                    enabled : true
+                }
+            },
+            font : {
+                face : "Liberation Sans"
+            }
+        },
+        edges : {
+            // smooth : {
+            //     type : "cubicBezier"
+            // }
+        },
+        // physics : {
+        //     enabled : false
+        // },
+        // groups: {
+        //   "Algo": {
+        //     shape: 'icon',
+        //     icon: {
+        //       face: 'FontAwesome',
+        //       code: '\uf219',
+        //       size: 50,
+        //       color: '#57169a'
+        //     }
+        //   }
+        // }
+      };
+  var network = new vis.Network(container, data, options);
+</script>
+<p>
+    <i class="fa fa-user-circle-o"></i>
+</p>
+
+</body>
+</html>
